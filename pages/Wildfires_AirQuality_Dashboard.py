@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import pandas as pd
 import requests
@@ -5,6 +6,26 @@ import folium
 from streamlit_folium import st_folium
 import plotly.express as px
 from datetime import datetime, timedelta
+
+DATA_PATH = "data/firms_last10days.csv"
+
+def get_firms_data():
+    today = date.today()
+    # Check if file already exists and is recent (within 1 day)
+    if os.path.exists(DATA_PATH):
+        file_time = datetime.fromtimestamp(os.path.getmtime(DATA_PATH))
+        if datetime.utcnow() - file_time < timedelta(hours=24):
+            return pd.read_csv(DATA_PATH)
+            
+    FIRMS_url = f"https://firms.modaps.eosdis.nasa.gov/api/area/csv/26af21577de6312527a09da2b7b3a18c/VIIRS_SNPP_NRT/world/10/{today}"
+    try:
+        fire_df = pd.read_csv(FIRMS_url)
+        os.makedirs("data", exist_ok=True)
+        fire_df.to_csv(DATA_PATH, index=False)
+        return fire_df
+    except Exception as e:
+        st.error("Failed to fetch FIRMS data.")
+        return pd.DataFrame()
 
 # Sidebar
 st.sidebar.title("Dashboard Filters")
@@ -29,9 +50,7 @@ region_bounds = {
 
 bbox = region_bounds[region]
 
-# ---------------- Wildfire Data (NASA FIRMS) ----------------
-fire_url = f"https://firms.modaps.eosdis.nasa.gov/api/area/csv/26af21577de6312527a09da2b7b3a18c/VIIRS_SNPP_NRT/world/1"
-fire_df = pd.read_csv(fire_url)
+fire_df = get_firms_data(bbox)
 
 
 #aq_url = f"https://api.openaq.org/v2/measurements?date_from={start_str}&limit=10000&coordinates={bbox[1]},{bbox[0]}"
