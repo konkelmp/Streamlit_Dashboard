@@ -3,10 +3,9 @@ import streamlit as st
 import pandas as pd
 import requests
 import folium
-import date
 import plotly.express as px
 from streamlit_folium import st_folium
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 DATA_PATH = "data/firms_data.csv"
 
