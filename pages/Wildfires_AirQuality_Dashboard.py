@@ -10,7 +10,7 @@ from datetime import datetime, timedelta, date
 DATA_PATH = "data/firms_data.csv"
 
 # Cache FIRMS data for 24hrs
-# FIRMS data contains last 10 days
+# FIRMS data contains last 3 days
 @st.cache_data(ttl=86400)
 def get_firms_data():            
     firms_url = f"https://firms.modaps.eosdis.nasa.gov/api/area/csv/26af21577de6312527a09da2b7b3a18c/VIIRS_SNPP_NRT/world/10/{date.today() - timedelta(days=3)}"
