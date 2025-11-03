@@ -13,7 +13,7 @@ DATA_PATH = "data/firms_data.csv"
 # FIRMS data contains last 10 days
 @st.cache_data(ttl=86400)
 def get_firms_data():            
-    firms_url = f"https://firms.modaps.eosdis.nasa.gov/api/area/csv/26af21577de6312527a09da2b7b3a18c/VIIRS_SNPP_NRT/world/10/{date.today() - timedelta(days=10)}"
+    firms_url = f"https://firms.modaps.eosdis.nasa.gov/api/area/csv/26af21577de6312527a09da2b7b3a18c/VIIRS_SNPP_NRT/world/10/{date.today() - timedelta(days=3)}"
     try:
         firms_df = pd.read_csv(firms_url)
         firms_df.to_csv(DATA_PATH, index=False)
@@ -27,11 +27,11 @@ fire_df = get_firms_data()
 # Sidebar
 st.sidebar.title("Dashboard Filters")
 region = st.sidebar.selectbox("Select Region", ["North America", "South America", "Europe", "Asia", "Africa", "Oceania"])
-time_range = st.sidebar.selectbox("Select Time Range", ["Past Day", "Past 3 Days", "Past 10 Days"])
+time_range = st.sidebar.selectbox("Select Time Range", ["Past Day", "Past 2 Days", "Past 3 Days"])
 
 days = {"Past Day": 1,
-        "Past 3 Days": 3,
-        "Past 10 Days": 10}
+        "Past 2 Days": 2,
+        "Past 3 Days": 3}
         
 days_back = days[time_range]
 cutoff_date = datetime.utcnow().date() - timedelta(days=days_back)
