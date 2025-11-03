@@ -23,9 +23,9 @@ def get_firms_data():
         st.error("Failed to fetch FIRMS data.")
         return pd.DataFrame()
 
-if "firms_data" not in st.session_state:
+if "firms_df" not in st.session_state:
     st.session_state.firms_df = get_firms_data()
-firms_data = st.session_state.firms_df
+firms_df = st.session_state.firms_df
 
 # Sidebar
 st.sidebar.title("Dashboard Filters")
