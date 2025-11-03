@@ -9,20 +9,13 @@ from datetime import datetime, timedelta, date
 
 DATA_PATH = "data/firms_data.csv"
 
-def get_firms_data():
-    today = date.today()
-    # Check if file already exists and is recent (within 1 day)
-    if os.path.exists(DATA_PATH):
-        file_time = datetime.fromtimestamp(os.path.getmtime(DATA_PATH))
-        if datetime.utcnow() - file_time < timedelta(hours=24):
-            return pd.read_csv(DATA_PATH)
-            
-    firms_url = f"https://firms.modaps.eosdis.nasa.gov/api/area/csv/26af21577de6312527a09da2b7b3a18c/VIIRS_SNPP_NRT/world/10/{today}"
+@st.cache_data(ttl=86400)
+def get_firms_data():            
+    firms_url = f"https://firms.modaps.eosdis.nasa.gov/api/area/csv/26af21577de6312527a09da2b7b3a18c/VIIRS_SNPP_NRT/world/10/{date.today()}"
     try:
         firms_df = pd.read_csv(firms_url)
-        os.makedirs("data", exist_ok=True)
-        fire_df.to_csv(DATA_PATH, index=False)
-        return firm_df
+        firms_df.to_csv(DATA_PATH, index=False)
+        return firms_df
     except Exception as e:
         st.error("Failed to fetch FIRMS data.")
         return pd.DataFrame()
@@ -30,7 +23,7 @@ def get_firms_data():
 # Sidebar
 st.sidebar.title("Dashboard Filters")
 region = st.sidebar.selectbox("Select Region", ["North America", "South America", "Europe", "Asia", "Africa", "Pacifica"])
-date = st.sidebar.selectbox("Select Date", ["Past Day", "Past 3 Days", "Past 10 Days"])
+time_range = st.sidebar.selectbox("Select Time Range", ["Past Day", "Past 3 Days", "Past 10 Days"])
 
 #  Region Mapping 
 region_bounds = {
