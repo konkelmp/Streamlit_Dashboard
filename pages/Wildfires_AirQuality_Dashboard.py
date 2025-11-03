@@ -32,7 +32,7 @@ else:
 start_str = start_date.strftime("%Y-%m-%d")
 
 # ---------------- Wildfire Data (NASA FIRMS) ----------------
-fire_url = f"https://firms.modaps.eosdis.nasa.gov/api/area/csv?bbox={bbox_str}&date={start_str}&key=26af21577de6312527a09da2b7b3a18c"
+fire_url = f"https://firms.modaps.eosdis.nasa.gov/api/area/csv/26af21577de6312527a09da2b7b3a18c/VIIRS_SNPP_NRT/world/1"
 fire_df = pd.read_csv(fire_url)
 
 
