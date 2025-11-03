@@ -28,7 +28,7 @@ region_bounds = {
 }
 
 # ---------------- Wildfire Data (NASA FIRMS) ----------------
-fire_url = f"https://firms.modaps.eosdis.nasa.gov/api/area/csv/26af21577de6312527a09da2b7b3a18c/VIIRS_SNPP_NRT/world/1"
+fire_url = f"https://firms.modaps.eosdis.nasa.gov/api/area/csv/26af21577de6312527a09da2b7b3a18c/VIIRS_SNPP_NRT/world/10"
 fire_df = pd.read_csv(fire_url)
 
 
