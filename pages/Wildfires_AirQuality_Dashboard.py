@@ -3,11 +3,12 @@ import streamlit as st
 import pandas as pd
 import requests
 import folium
-from streamlit_folium import st_folium
+import date
 import plotly.express as px
+from streamlit_folium import st_folium
 from datetime import datetime, timedelta
 
-DATA_PATH = "data/firms_last10days.csv"
+DATA_PATH = "data/firms_data.csv"
 
 def get_firms_data():
     today = date.today()
@@ -17,12 +18,12 @@ def get_firms_data():
         if datetime.utcnow() - file_time < timedelta(hours=24):
             return pd.read_csv(DATA_PATH)
             
-    FIRMS_url = f"https://firms.modaps.eosdis.nasa.gov/api/area/csv/26af21577de6312527a09da2b7b3a18c/VIIRS_SNPP_NRT/world/10/{today}"
+    firms_url = f"https://firms.modaps.eosdis.nasa.gov/api/area/csv/26af21577de6312527a09da2b7b3a18c/VIIRS_SNPP_NRT/world/10/{today}"
     try:
-        fire_df = pd.read_csv(FIRMS_url)
+        firms_df = pd.read_csv(firms_url)
         os.makedirs("data", exist_ok=True)
         fire_df.to_csv(DATA_PATH, index=False)
-        return fire_df
+        return firm_df
     except Exception as e:
         st.error("Failed to fetch FIRMS data.")
         return pd.DataFrame()
@@ -44,7 +45,7 @@ region_bounds = {
 
 bbox = region_bounds[region]
 
-fire_df = pd.read_csv("data/firms_data.csv")
+fire_df = get_firms_data()
 
 #  Wildfire Choropleth Map
 st.subheader("🔥 Wildfire Activity Map")
