@@ -74,6 +74,7 @@ fig3 = px.scatter(
     y="latitude",
     color="frp",
     color_continuous_scale="reds",
+    size="frp",
     hover_data=["acq_date", "confidence", "satellite"],
     title="Fire Locations with FRP Intensity"
 )
@@ -84,7 +85,7 @@ st.markdown(
     """
     - Each point = one fire detection.
     - X-axis = longitude, Y-axis = latitude.
-    - Color encodes FRP intensity (lighter = weaker, darker = stronger).
+    - Color and point size encodes FRP intensity.
     - Hover shows date, confidence, and satellite information.
     """
 )
