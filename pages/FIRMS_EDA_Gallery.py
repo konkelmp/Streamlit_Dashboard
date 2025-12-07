@@ -7,7 +7,7 @@ st.set_page_config(page_title="FIRMS Exploratory Data Analysis Gallery", page_ic
 firms_df = st.session_state.get("firms_df")
 
 if firms_df is None or firms_df.empty:
-    st.warning("No FIRMS data available. Please refresh or check the API.")
+    st.warning("No FIRMS data available. Please refresh from Home Page")
     st.stop()
 
 st.title("📊 EDA Gallery (Exploratory Data Analysis Showcase)")
