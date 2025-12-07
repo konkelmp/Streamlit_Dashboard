@@ -93,7 +93,3 @@ night_count = (filtered_df['daynight'] == "N").sum()
 st.metric("Detection Day or Night", f"{day_count} / {night_count}")
 
 st.metric("Top Reporting Satellite", filtered_df['satellite'].mode()[0])
-
-# Show timestamp
-st.caption(f"🔄 Data last refreshed: {st.session_state['last_refreshed'].strftime('%Y-%m-%d %H:%M UTC')}")
-
