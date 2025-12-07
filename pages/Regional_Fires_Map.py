@@ -8,25 +8,7 @@ from streamlit_folium import st_folium
 from datetime import datetime, timedelta, date
 from folium.plugins import MarkerCluster
 
-DATA_PATH = "data/firms_data.csv"
-
-# Cache FIRMS data for 24hrs
-# FIRMS data contains last 3 days
-@st.cache_data(ttl=86400)
-def get_firms_data():            
-    firms_url = f"https://firms.modaps.eosdis.nasa.gov/api/area/csv/26af21577de6312527a09da2b7b3a18c/VIIRS_SNPP_NRT/world/3"
-    try:
-        firms_df = pd.read_csv(firms_url)
-        os.makedirs("data", exist_ok=True)
-        firms_df.to_csv(DATA_PATH, index=False)
-        return firms_df
-    except Exception as e:
-        st.error("Failed to fetch FIRMS data.")
-        return pd.DataFrame()
-
-if "firms_df" not in st.session_state:
-    st.session_state.firms_df = get_firms_data()
-firms_df = st.session_state.firms_df
+#DATA_PATH = "data/firms_data.csv"
 
 # Sidebar
 st.sidebar.title("Dashboard Filters")
