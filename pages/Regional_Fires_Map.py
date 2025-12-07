@@ -6,7 +6,7 @@ from streamlit_folium import st_folium
 from datetime import datetime, timedelta, date
 from folium.plugins import MarkerCluster
 
-#DATA_PATH = "data/firms_data.csv"
+firms_df = st.session_state["firms_data"]
 
 # Sidebar
 st.sidebar.title("Dashboard Filters")
