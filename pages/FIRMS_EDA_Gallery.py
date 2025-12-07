@@ -35,7 +35,6 @@ st.markdown(
   - Most detections are in the *Nominal* category.
   - High confidence fires are fewer but more reliable.
   - Low confidence fires are rare.
-  - Distribution shifts slightly by region but remains consistent overall.
   """
 )
 
@@ -43,7 +42,7 @@ st.markdown(
 st.subheader("2️⃣ Distribution of Fire Radiative Power (FRP)")
 st.write("**Question:** What is the distribution of fire intensity (FRP) among detected fires?")
 
-fig2 = px.histogram(firms_df, x="frp", nbins=30, title="FRP Distribution (MW)", color="frp")
+fig2 = px.histogram(firms_df, x="frp", nbins=30, title="FRP Distribution (MW)", color="frp", color_discrete_sequence=["#FF5733", "#33FF57", "#3357FF", "#FFC300"])
 st.plotly_chart(fig2, use_container_width=True)
 
 st.markdown("**How to read this chart:**")
@@ -52,7 +51,7 @@ st.markdown(
     - X-axis shows FRP values (megawatts).
     - Y-axis shows number of fires in each FRP bin.
     - The shape shows whether most fires are weak or strong.
-    - Outliers appear as bars far to the right.
+    - Most fires are relatively weak
     """
 )
 
