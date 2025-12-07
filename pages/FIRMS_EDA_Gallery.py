@@ -104,7 +104,7 @@ st.markdown(
 st.subheader("4️⃣ FRP by Day vs Night Detection")
 st.write("**Question explored:** How does fire intensity (FRP) differ between day and night detections?")
 
-fig4 = px.box(firms_df, x="Day/Night", y="FRP (MW)", title="FRP by Day/Night")
+fig4 = px.box(firms_df, x="daynight", y="frp", title="FRP by Day/Night")
 fig4.update_yaxes(type="log")
 st.plotly_chart(fig4, use_container_width=True)
 
