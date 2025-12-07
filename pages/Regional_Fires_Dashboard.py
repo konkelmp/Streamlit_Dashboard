@@ -8,17 +8,18 @@ from folium.plugins import MarkerCluster
 
 firms_df = st.session_state.get("firms_df")
 
+###########################################
+
 # Sidebar
 st.sidebar.title("Dashboard Filters")
-region = st.sidebar.selectbox("Select Region", ["North America", "South America", "Europe", "Asia", "Africa", "Oceania"])
-time_range = st.sidebar.selectbox("Select Time Range", ["Past Day", "Past 2 Days", "Past 3 Days"])
-confidence = st.sidebar.selectbox("Select Confidence Level", ["Low", "Medium", "High"])
+region_select = st.sidebar.selectbox("Select Region", ["North America", "South America", "Europe", "Asia", "Africa", "Oceania"])
+time_range_select = st.sidebar.selectbox("Select Time Range", ["Past Day", "Past 2 Days", "Past 3 Days"])
+confidence_select = st.sidebar.selectbox("Select Confidence Level", ["Low", "Medium", "High"])
 
 # Day Mapping
 days = {"Past Day": 1,
         "Past 2 Days": 2,
         "Past 3 Days": 3}
-        
 days_back = days[time_range]
 cutoff_date = datetime.utcnow().date() - timedelta(days=days_back)
 
@@ -31,10 +32,13 @@ region_bounds = {
     "Africa": [-20, -35, 55, 35],
     "Oceania": [110, -50, 180, 10]
 }
-lon_min, lat_min, lon_max, lat_max = region_bounds[region]
+lon_min, lat_min, lon_max, lat_max = region_bounds[region_select]
 
 # Confidence level mapping
-confidence_levels = {"Low": "l", "Medium": "m", "High": "h"}
+confidences = {"Low": "l", "Medium": "m", "High": "h"}
+confidence = confidences[confidence_select]
+
+###########################################
 
 # Filter by region
 filtered_df = firms_df[
@@ -48,12 +52,14 @@ filtered_df = filtered_df[filtered_df['acq_date'] >= cutoff_date]
 
 # Filter by confidence
 if firms_df['confidence'].dtype == 'object':
-    filtered_df = filtered_df[filtered_df['confidence'].isin(confidence_selected)]
+    filtered_df = filtered_df[filtered_df['confidence'].isin(confidence)]
 else:
     filtered_df = filtered_df[
         (filtered_df['confidence'] >= confidence_selected[0]) &
         (filtered_df['confidence'] <= confidence_selected[1])
     ]
+
+###########################################
 
 #  Wildfire Choropleth Map
 st.subheader(f"🔥 Wildfires in {region}")
@@ -72,6 +78,7 @@ for _, row in filtered_df.iterrows():
 
 st_folium(fire_map, width=700)
 
+###########################################
 
 #  KPI Metrics
 st.subheader("📊 Key Metrics")
