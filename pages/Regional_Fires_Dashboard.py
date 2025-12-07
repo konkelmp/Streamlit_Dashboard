@@ -40,7 +40,7 @@ region_bounds = {
 lon_min, lat_min, lon_max, lat_max = region_bounds[region_select]
 
 # Confidence level mapping
-confidences = {"Low": "l", "Nominal": "n", "High": "h"}
+confidences = {"All": "", "Low": "l", "Nominal": "n", "High": "h"}
 confidence = confidences[confidence_select]
 
 ###########################################
@@ -56,7 +56,7 @@ filtered_df['acq_date'] = pd.to_datetime(filtered_df['acq_date']).dt.date
 filtered_df = filtered_df[filtered_df['acq_date'] >= cutoff_date]
 
 # Filter by confidence
-if (confidence != 'All'):
+if (confidence != ""):
     filtered_df = filtered_df[filtered_df['confidence'] == confidence]
 
 
