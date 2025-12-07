@@ -1,3 +1,6 @@
+import plotly.express as px
+import streamlit as st
+
 def satellite_page(df):
     st.title("Satellite Reporting Frequency")
 
