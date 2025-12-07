@@ -51,7 +51,6 @@ st.markdown(
     - X-axis shows FRP values (megawatts).
     - Y-axis shows number of fires in each FRP bin.
     - The shape shows whether most fires are weak or strong.
-    - Most fires are relatively weak
     """
 )
 
