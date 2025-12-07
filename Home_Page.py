@@ -1,4 +1,4 @@
-import requests
+fimport requests
 import streamlit as st
 import pandas as pd
 
@@ -28,10 +28,10 @@ def get_firms_data():
     try:
         firms_df = pd.read_csv(firms_url)
         last_refreshed = datetime.datetime.utcnow()
-        return firms_df
+        return firms_df, last_refreshed
     except Exception as e:
         st.error("Failed to fetch FIRMS data.")
-        return pd.DataFrame()
+        return pd.DataFrame(), datetime.datetime.utcnow()
 
 if "firms_df" not in st.session_state:
     st.session_state.firms_df = get_firms_data()
