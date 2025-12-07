@@ -51,13 +51,8 @@ filtered_df['acq_date'] = pd.to_datetime(filtered_df['acq_date']).dt.date
 filtered_df = filtered_df[filtered_df['acq_date'] >= cutoff_date]
 
 # Filter by confidence
-if firms_df['confidence'].dtype == 'object':
-    filtered_df = filtered_df[filtered_df['confidence'].isin(confidence)]
-else:
-    filtered_df = filtered_df[
-        (filtered_df['confidence'] >= confidences[0]) &
-        (filtered_df['confidence'] <= confidences[1])
-    ]
+filtered_df = filtered_df[filtered_df['confidence'] == confidence]
+
 
 ###########################################
 
