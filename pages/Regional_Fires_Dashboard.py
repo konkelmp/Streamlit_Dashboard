@@ -14,7 +14,7 @@ firms_df = st.session_state.get("firms_df")
 st.sidebar.title("Dashboard Filters")
 region_select = st.sidebar.selectbox("Select Region", ["North America", "South America", "Europe", "Asia", "Africa", "Oceania"])
 time_range_select = st.sidebar.selectbox("Select Time Range", ["Past Day", "Past 2 Days", "Past 3 Days"])
-confidence_select = st.sidebar.selectbox("Select Confidence Level", ["Low", "Medium", "High"])
+confidence_select = st.sidebar.selectbox("Select Confidence Level", ["Low", "Nominal", "High"])
 
 # Day Mapping
 days = {"Past Day": 1,
@@ -35,7 +35,7 @@ region_bounds = {
 lon_min, lat_min, lon_max, lat_max = region_bounds[region_select]
 
 # Confidence level mapping
-confidences = {"Low": "l", "Medium": "m", "High": "h"}
+confidences = {"Low": "l", "Nominal": "n", "High": "h"}
 confidence = confidences[confidence_select]
 
 ###########################################
