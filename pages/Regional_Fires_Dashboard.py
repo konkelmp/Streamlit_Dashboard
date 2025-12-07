@@ -19,7 +19,7 @@ if firms_df is None or firms_df.empty:
 st.sidebar.title("Dashboard Filters")
 region_select = st.sidebar.selectbox("Select Region", ["North America", "South America", "Europe", "Asia", "Africa", "Oceania"])
 time_range_select = st.sidebar.selectbox("Select Time Range", ["Past Day", "Past 2 Days", "Past 3 Days"])
-confidence_select = st.sidebar.selectbox("Select Confidence Level", ["Low", "Nominal", "High"])
+confidence_select = st.sidebar.selectbox("Select Confidence Level", ["All", "Low", "Nominal", "High"])
 
 # Day Mapping
 days = {"Past Day": 1,
@@ -56,7 +56,8 @@ filtered_df['acq_date'] = pd.to_datetime(filtered_df['acq_date']).dt.date
 filtered_df = filtered_df[filtered_df['acq_date'] >= cutoff_date]
 
 # Filter by confidence
-filtered_df = filtered_df[filtered_df['confidence'] == confidence]
+if (confidence != 'All'):
+    filtered_df = filtered_df[filtered_df['confidence'] == confidence]
 
 
 ###########################################
