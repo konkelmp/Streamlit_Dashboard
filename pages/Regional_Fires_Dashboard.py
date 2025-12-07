@@ -86,7 +86,7 @@ with col1:
             popup=f"Date: {row['acq_date']} | Confidence: {row['confidence']}"
         ).add_to(marker_cluster)
 
-    st_folium(fire_map, width=500, height=400)
+    st_folium(fire_map, width=500, height=350)
 
 # Right column: Line chart of daily fire counts
 with col2:
@@ -111,7 +111,7 @@ with col3:
     
     day_count = (filtered_df['daynight'] == "D").sum()
     night_count = (filtered_df['daynight'] == "N").sum()
-    st.metric("Detection Day or Night", f"{day_count} / {night_count}")
+    st.metric("Detection Day or Night", f"Day: {day_count} \n Night: {night_count}")
     
     st.metric("Top Reporting Satellite", filtered_df['satellite'].mode()[0])
         
