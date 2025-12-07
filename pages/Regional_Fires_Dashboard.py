@@ -88,18 +88,10 @@ with col1:
 
     st_folium(fire_map, width=500, height=350)
 
-# Right column: Line chart of daily fire counts
+# Bar hart of confidence levels
 with col2:
-    st.subheader("📈 Fires Over Time")
-    if not filtered_df.empty:
-        daily_counts = (
-            filtered_df.groupby('acq_date')
-            .size()
-            .reset_index(name='count')
-        )
-        st.line_chart(daily_counts.set_index('acq_date'))
-    else:
-        st.info("No data available for this selection.")
+    conf_counts = filtered_df['confidence'].value_counts()
+    st.bar_chart(conf_counts)
         
 ###########################################
 #  KPI Metrics
