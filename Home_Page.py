@@ -6,7 +6,7 @@ import pandas as pd
 st.set_page_config(
     page_title="Fire Systems - NASA FIRMS Data Visualization",
     page_icon="🔥 🌎 🔥",
-    layout="center"
+    layout="centered"
 )
 
 st.title(" Welcome to My Streamlit Site")
