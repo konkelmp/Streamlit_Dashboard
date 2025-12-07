@@ -4,9 +4,9 @@ import streamlit as st
 import pandas as pd
 
 st.set_page_config(
-    page_title="My Streamlit Site",
-    page_icon="📊",
-    layout="wide"
+    page_title="Fire Systems - NASA FIRMS Data Visualization",
+    page_icon="🔥 🌎 🔥",
+    layout="center"
 )
 
 st.title(" Welcome to My Streamlit Site")
