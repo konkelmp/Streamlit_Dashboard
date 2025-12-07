@@ -62,7 +62,7 @@ if (confidence != ""):
 
 ###########################################
 
-#  Wildfire Choropleth Map
+#  Fire Choropleth Map
 st.subheader(f"🔥 Fires in {region_select}")
 fire_map = folium.Map(location=[(lat_min + lat_max)/2, (lon_min + lon_max)/2], zoom_start=3)
 marker_cluster = MarkerCluster().add_to(fire_map)
@@ -78,6 +78,10 @@ for _, row in filtered_df.iterrows():
     ).add_to(marker_cluster)
 
 st_folium(fire_map, width=700)
+
+# Line chart of fires over last 3 days
+daily_counts = filtered_df.groupby('acq_date').size().reset_index(name='count')
+st.line_chart(daily_counts.set_index('acq_date'))
 
 ###########################################
 
