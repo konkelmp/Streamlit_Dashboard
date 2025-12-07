@@ -73,6 +73,7 @@ fig3 = px.scatter(
     x="longitude",
     y="latitude",
     color="frp",
+    color_continuous_scale="red",
     size="frp",
     hover_data=["acq_date", "confidence", "satellite"],
     title="Fire Locations with FRP Intensity"
