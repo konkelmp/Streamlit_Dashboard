@@ -6,6 +6,12 @@ from streamlit_folium import st_folium
 from datetime import datetime, timedelta, date
 from folium.plugins import MarkerCluster
 
+st.set_page_config(
+    page_title="DASHBOARD",
+    page_icon="🔥 🌎 🔥",
+    layout="left"
+)
+
 firms_df = st.session_state.get("firms_df")
 
 if firms_df is None or firms_df.empty:
