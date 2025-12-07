@@ -14,12 +14,12 @@ It includes a home landing page, a bio page, EDA gallery, interactive dashboard,
 This site uses the NASA FIRMS API to query the past 3 days of fire area information. The data is cached each day and only one call per 24 hours is made.
 
 ## Requirements
-Python libraries required
-streamlit>=1.36
-pandas>=2.2
-plotly>=5.22
-folium>=0.14.0
-streamlit-folium>=0.12.0
+Python libraries required \ 
+streamlit>=1.36 \
+pandas>=2.2 \
+plotly>=5.22 \
+folium>=0.14.0 \
+streamlit-folium>=0.12.0 \
 requests
 
 ## AI Assistance Acknowledgement
