@@ -68,7 +68,7 @@ if (confidence != ""):
 
 ###########################################
 
-col1, col2, col3 = st.columns([3, 2, 1])
+col1, col2 = st.columns([3, 2])
 
 # Folium map
 with col1:
@@ -100,19 +100,17 @@ with col2:
         st.line_chart(daily_counts.set_index('acq_date'))
     else:
         st.info("No data available for this selection.")
-
-with col3:
-    #  KPI Metrics
-    st.subheader("📊 Key Metrics")
-    
-    st.metric("Total Fires", len(filtered_df))
-    avg_frp = round(filtered_df['frp'].mean(), 2)
-    st.metric("Average Fire Radiative Power (FRP) in MegaWatts", avg_frp)
-    
-    day_count = (filtered_df['daynight'] == "D").sum()
-    night_count = (filtered_df['daynight'] == "N").sum()
-    st.metric("Detection Day or Night", f"Day: {day_count} \n Night: {night_count}")
-    
-    st.metric("Top Reporting Satellite", filtered_df['satellite'].mode()[0])
         
 ###########################################
+#  KPI Metrics
+st.subheader("📊 Key Metrics")
+
+st.metric("Total Fires", len(filtered_df))
+avg_frp = round(filtered_df['frp'].mean(), 2)
+st.metric("Average Fire Radiative Power (FRP) in MegaWatts", avg_frp)
+
+day_count = (filtered_df['daynight'] == "D").sum()
+night_count = (filtered_df['daynight'] == "N").sum()
+st.metric("Detection Day or Night", f"Day: {day_count} \n Night: {night_count}")
+
+st.metric("Top Reporting Satellite", filtered_df['satellite'].mode()[0])
